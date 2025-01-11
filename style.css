@@ -1,0 +1,84 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calculator {
+    border: 5px solid black;
+    background-color: black;
+}
+
+.display {
+    background-color: gray;
+    height: 75px;
+    margin: 5px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    font-size: 25px;
+    font-weight: 900;
+}
+
+.keypad {
+    display: flex;
+    font-size: 15px;
+    padding: 5px;
+}
+
+.operators-keys {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    flex: 1 1 25%;
+    margin-left: 10px;
+}
+
+.operator.button {
+    flex: 1 1 30%;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: rgb(55, 173, 31);
+    border-radius: 5px;
+}
+
+.number-keys {
+    display: flex;
+    flex-wrap: wrap-reverse;
+    gap: 5px;
+    flex: 1 1 75%;
+}
+
+.number.button {
+    flex: 1 1 30%;
+    box-sizing: border-box;
+    text-align: center;
+    background-color: rgb(110, 110, 255);
+    border-radius: 5px;
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    padding: 10px 5px;
+}
+
+.button:hover {
+    opacity: .8;
+}
+
+.button:active {
+    opacity: .6;
+}
