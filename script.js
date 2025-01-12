@@ -112,13 +112,13 @@ function updateDisplay(number) {
 
 operatorsKeypad.addEventListener("click", (event) => {
     const target = event.target;
+    if (target.classList.contains("button")) {
+        const result = calculation.calculate();
+        updateDisplay(result);
+    }
     if (target.classList.contains("operator")) {
         const buttonValue = getDataValue(target);
         calculation.setOperator(buttonValue);
-    }
-    if (target.classList.contains("calculate")) {
-        const result = calculation.calculate();
-        updateDisplay(result);
     }
 });
 
