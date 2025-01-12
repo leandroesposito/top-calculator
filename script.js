@@ -46,8 +46,8 @@ const calculation = {
             result = operate(this.num1, this.num2, this.operator);
             this.clearMemory();
             if (!isNaN(result)) {
-            this.num2 = result;
-        }
+                this.num2 = result;
+            }
         }
         return result;
     },
