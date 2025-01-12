@@ -49,7 +49,6 @@ body {
     box-sizing: border-box;
     text-align: center;
     background-color: rgb(55, 173, 31);
-    border-radius: 5px;
 }
 
 .numbers-keypad {
@@ -64,7 +63,6 @@ body {
     box-sizing: border-box;
     text-align: center;
     background-color: rgb(110, 110, 255);
-    border-radius: 5px;
 }
 
 .button {
@@ -73,6 +71,7 @@ body {
     align-items: center;
     cursor: pointer;
     padding: 10px 5px;
+    border-radius: 5px;
 }
 
 .button:hover {
@@ -87,7 +86,7 @@ body {
     flex: 1 1 66%;
 }
 
-.button.number.clear {
+.button.clear {
     flex: 2 1;
     background-color: rgb(207, 207, 0);
 }
