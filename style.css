@@ -44,11 +44,15 @@ body {
     margin-left: 10px;
 }
 
-.operator.button {
+.operators-keypad>.button {
     flex: 1 1 30%;
     box-sizing: border-box;
     text-align: center;
     background-color: rgb(55, 173, 31);
+}
+
+.button.calculate {
+    background-color: rgb(255, 100, 100);
 }
 
 .numbers-keypad {
