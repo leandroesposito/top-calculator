@@ -1,5 +1,6 @@
-const numbersKeypad = document.querySelector(".numbers-keypad");
 const display = document.querySelector(".display");
+const numbersKeypad = document.querySelector(".numbers-keypad");
+const operatorsKeypad = document.querySelector(".operators-keypad");
 
 const operations = {
     add(a, b) {
@@ -29,6 +30,16 @@ const calculation = {
         this.num2 = null;
         this.operand = null;
     },
+    setOperand(operand) {
+        this.operand = operand;
+        if (this.num1 === null && this.num2 !== null) {
+            this.switchNumbers();
+        }
+    },
+    switchNumbers() {
+        this.num1 = this.num2;
+        this.num2 = null;
+    }
 }
 
 function operate(num1, num2, operator) {
@@ -75,3 +86,11 @@ function addDigit(number) {
 function updateDisplay(number) {
     display.textContent = number;
 }
+
+operatorsKeypad.addEventListener("click", (event) => {
+    const target = event.target;
+    if (target.classList.contains("operator")) {
+        const buttonValue = target.getAttribute("data-value");
+        calculation.setOperand(buttonValue);
+    }
+});
