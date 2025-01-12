@@ -84,6 +84,9 @@ function operate(num1, num2, operator) {
 numbersKeypad.addEventListener("click", (event) => {
     const target = event.target;
     if (target.classList.contains("number")) {
+        if (calculation.operator === "=") {
+            calculation.clearMemory();
+        }
         const buttonValue = getDataValue(target);
         addDigit(buttonValue);
     }
