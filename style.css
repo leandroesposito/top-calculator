@@ -18,7 +18,7 @@ body {
 
 .display {
     background-color: gray;
-    height: 75px;
+    height: 100px;
     margin: 5px;
     border-radius: 5px;
     display: flex;
@@ -26,13 +26,13 @@ body {
     align-items: center;
     padding: 20px;
     box-sizing: border-box;
-    font-size: 25px;
+    font-size: 50px;
     font-weight: 900;
 }
 
 .keypad {
     display: flex;
-    font-size: 15px;
+    font-size: 30px;
     padding: 5px;
 }
 
