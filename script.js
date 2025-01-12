@@ -39,6 +39,15 @@ const calculation = {
     switchNumbers() {
         this.num1 = this.num2;
         this.num2 = null;
+    },
+    calculate() {
+        let result = null;
+        if (this.num1 && this.num2 && this.operator) {
+            result = operate(this.num1, this.num2, this.operator);
+            this.clearMemory();
+            this.num2 = result;
+        }
+        return result;
     }
 }
 
@@ -92,6 +101,10 @@ operatorsKeypad.addEventListener("click", (event) => {
     if (target.classList.contains("operator")) {
         const buttonValue = getDataValue(target);
         calculation.setOperator(buttonValue);
+    }
+    if (target.classList.contains("calculate")) {
+        const result = calculation.calculate();
+        updateDisplay(result);
     }
 });
 
