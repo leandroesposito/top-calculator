@@ -68,7 +68,7 @@ function operate(num1, num2, operator) {
 numbersKeypad.addEventListener("click", (event) => {
     const target = event.target;
     if (target.classList.contains("number")) {
-        const buttonValue = event.target.getAttribute("data-value");
+        const buttonValue = getDataValue(target);
         addDigit(buttonValue);
     }
     else if (target.classList.contains("clear")) {
@@ -90,7 +90,11 @@ function updateDisplay(number) {
 operatorsKeypad.addEventListener("click", (event) => {
     const target = event.target;
     if (target.classList.contains("operator")) {
-        const buttonValue = target.getAttribute("data-value");
+        const buttonValue = getDataValue(target);
         calculation.setOperator(buttonValue);
     }
 });
+
+function getDataValue(element) {
+    return element.getAttribute("data-value");
+}
