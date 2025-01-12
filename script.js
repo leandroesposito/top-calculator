@@ -45,3 +45,14 @@ function operate(num1, num2, operator) {
 
     return result;
 }
+
+const numbersKeypad = document.querySelector(".numbers-keypad");
+
+numbersKeypad.addEventListener("click", (event) => {
+    console.log(event);
+    const target = event.target;
+    if (target.classList.contains("number")) {
+        console.log(event.target);
+        console.log(event.target.getAttribute("data-value"));
+    }
+})
