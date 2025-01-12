@@ -49,10 +49,21 @@ function operate(num1, num2, operator) {
 const numbersKeypad = document.querySelector(".numbers-keypad");
 
 numbersKeypad.addEventListener("click", (event) => {
-    console.log(event);
     const target = event.target;
     if (target.classList.contains("number")) {
-        console.log(event.target);
-        console.log(event.target.getAttribute("data-value"));
+        const buttonValue = event.target.getAttribute("data-value");
+        addDigit(buttonValue);
     }
-})
+});
+
+function addDigit(number) {
+    newDigit = +number;
+    calculation.num2 = calculation.num2 * 10 + newDigit;
+
+    updateDisplay(calculation.num2);
+}
+
+function updateDisplay(number) {
+    const display = document.querySelector(".display");
+    display.textContent = number;
+}
