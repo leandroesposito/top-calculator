@@ -82,6 +82,7 @@ numbersKeypad.addEventListener("click", (event) => {
     }
     else if (target.classList.contains("clear")) {
         calculation.clearMemory();
+        clearDisplay();
     }
 });
 
@@ -92,8 +93,14 @@ function addDigit(number) {
     updateDisplay(calculation.num2);
 }
 
+function clearDisplay() {
+    updateDisplay("");
+}
+
 function updateDisplay(number) {
-    display.textContent = number;
+    if (number !== null) {
+        display.textContent = number;
+    }
 }
 
 operatorsKeypad.addEventListener("click", (event) => {
