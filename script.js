@@ -1,3 +1,6 @@
+const numbersKeypad = document.querySelector(".numbers-keypad");
+const display = document.querySelector(".display");
+
 const operations = {
     add(a, b) {
         return a + b;
@@ -46,8 +49,6 @@ function operate(num1, num2, operator) {
     return result;
 }
 
-const numbersKeypad = document.querySelector(".numbers-keypad");
-
 numbersKeypad.addEventListener("click", (event) => {
     const target = event.target;
     if (target.classList.contains("number")) {
@@ -64,6 +65,5 @@ function addDigit(number) {
 }
 
 function updateDisplay(number) {
-    const display = document.querySelector(".display");
     display.textContent = number;
 }
