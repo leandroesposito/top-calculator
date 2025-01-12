@@ -24,6 +24,11 @@ const calculation = {
     num1: null,
     num2: null,
     operand: null,
+    clearMemory() {
+        this.num1 = null;
+        this.num2 = null;
+        this.operand = null;
+    },
 }
 
 function operate(num1, num2, operator) {
@@ -54,6 +59,9 @@ numbersKeypad.addEventListener("click", (event) => {
     if (target.classList.contains("number")) {
         const buttonValue = event.target.getAttribute("data-value");
         addDigit(buttonValue);
+    }
+    else if (target.classList.contains("clear")) {
+        calculation.clearMemory();
     }
 });
 
