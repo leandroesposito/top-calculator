@@ -42,12 +42,17 @@ const calculation = {
     },
     calculate() {
         let result = null;
-        if (this.num1 && this.num2 && this.operator) {
+        if (this.allSet()) {
             result = operate(this.num1, this.num2, this.operator);
             this.clearMemory();
             this.num2 = result;
         }
         return result;
+    },
+    allSet() {
+        return (this.num1 !== null &&
+            this.num2 !== null &&
+            this.operator !== null);
     }
 }
 
