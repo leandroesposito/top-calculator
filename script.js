@@ -24,14 +24,14 @@ const operations = {
 const calculation = {
     num1: null,
     num2: null,
-    operand: null,
+    operator: null,
     clearMemory() {
         this.num1 = null;
         this.num2 = null;
-        this.operand = null;
+        this.operator = null;
     },
-    setOperand(operand) {
-        this.operand = operand;
+    setOperator(operator) {
+        this.operator = operator;
         if (this.num1 === null && this.num2 !== null) {
             this.switchNumbers();
         }
@@ -91,6 +91,6 @@ operatorsKeypad.addEventListener("click", (event) => {
     const target = event.target;
     if (target.classList.contains("operator")) {
         const buttonValue = target.getAttribute("data-value");
-        calculation.setOperand(buttonValue);
+        calculation.setOperator(buttonValue);
     }
 });
