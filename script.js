@@ -117,17 +117,21 @@ numbersKeypad.addEventListener("click", (event) => {
     const target = event.target;
     if (target.classList.contains("number") ||
         target.classList.contains("dot")) {
-        if (calculation.operator === "=") {
-            calculation.clearMemory();
-        }
         const buttonValue = getDataValue(target);
-        appendNumber(buttonValue);
+        handleNumberPress(buttonValue);
     }
     else if (target.classList.contains("clear")) {
         calculation.clearMemory();
         clearDisplay();
     }
 });
+
+function handleNumberPress(buttonValue) {
+    if (calculation.operator === "=") {
+        calculation.clearMemory();
+    }
+    appendNumber(buttonValue);
+}
 
 function appendNumber(number) {
     calculation.appendNumber(number);
@@ -169,4 +173,11 @@ backspaceButton.addEventListener("click", (event) => {
     }
     updateDisplay(calculation.num2);
     event.stopImmediatePropagation();
+});
+
+document.body.addEventListener("keydown", (event) => {
+    const key = event.key;
+    if ("0123456789.".includes(key)) {
+        handleNumberPress(key);
+    }
 });
