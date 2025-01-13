@@ -62,7 +62,7 @@ body {
     flex: 1 1 75%;
 }
 
-.number.button {
+.numbers-keypad>.button {
     flex: 1 1 30%;
     box-sizing: border-box;
     text-align: center;
@@ -86,11 +86,6 @@ body {
     opacity: .6;
 }
 
-.button.number.zero {
-    flex: 1 1 66%;
-}
-
 .button.clear {
-    flex: 2 1;
     background-color: rgb(207, 207, 0);
 }
