@@ -169,4 +169,4 @@ backspaceButton.addEventListener("click", (event) => {
     }
     updateDisplay(calculation.num2);
     event.stopImmediatePropagation();
-})
+});
