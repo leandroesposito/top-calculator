@@ -128,7 +128,7 @@ function appendNumber(number) {
 }
 
 function clearDisplay() {
-    updateDisplay("");
+    updateDisplay("0");
 }
 
 function updateDisplay(number) {
