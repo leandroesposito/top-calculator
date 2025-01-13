@@ -1,6 +1,7 @@
 const display = document.querySelector(".display");
 const numbersKeypad = document.querySelector(".numbers-keypad");
 const operatorsKeypad = document.querySelector(".operators-keypad");
+const backspaceButton = document.querySelector(".backspace");
 
 const operations = {
     add(a, b) {
@@ -72,6 +73,12 @@ const calculation = {
             this.num2 = (this.num2 ?? "") + number;
         }
     },
+    removeLastNumber() {
+        if (this.num2 !== null) {
+            let newNumber = this.num2.slice(0, -1);
+            this.num2 = newNumber !== "" ? newNumber : null;
+        }
+    },
     getNum1() {
         return parseFloat(this.num1 ?? 0);
     },
@@ -132,16 +139,16 @@ function clearDisplay() {
 }
 
 function updateDisplay(number) {
-    if (number !== null) {
-        display.textContent = number;
-    }
+    display.textContent = number ? number : "0";
 }
 
 operatorsKeypad.addEventListener("click", (event) => {
     const target = event.target;
     if (target.classList.contains("button")) {
         const result = calculation.calculate();
-        updateDisplay(result);
+        if (result !== null) {
+            updateDisplay(result);
+        }
     }
     if (target.classList.contains("operator")) {
         const buttonValue = getDataValue(target);
@@ -152,3 +159,14 @@ operatorsKeypad.addEventListener("click", (event) => {
 function getDataValue(element) {
     return element.getAttribute("data-value");
 }
+
+backspaceButton.addEventListener("click", (event) => {
+    if (calculation.operator === "=") {
+        calculation.clearMemory();
+    }
+    else {
+        calculation.removeLastNumber();
+    }
+    updateDisplay(calculation.num2);
+    event.stopImmediatePropagation();
+})
