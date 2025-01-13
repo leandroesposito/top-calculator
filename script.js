@@ -24,27 +24,21 @@ const operations = {
 const calculation = {
     num1: null,
     num2: null,
-    decimals: "",
     operator: null,
-    decimalMode: false,
     clearMemory() {
         this.num1 = null;
         this.num2 = null;
-        this.decimals = "";
         this.operator = null;
-        this.decimalMode = false;
     },
     setOperator(operator) {
         this.operator = operator;
         if (this.num1 === null && this.num2 !== null) {
             this.switchNumbers();
         }
-        this.decimals = "";
     },
     switchNumbers() {
-        this.num1 = this.getNum2();
+        this.num1 = this.num2;
         this.num2 = null;
-        this.decimalMode = false;
     },
     calculate() {
         let result = null;
@@ -52,9 +46,7 @@ const calculation = {
             result = operate(this.getNum1(), this.getNum2(), this.operator);
             this.clearMemory();
             if (!isNaN(result)) {
-                let [digits, decimals] = result.toString().split(".")
-                this.num2 = Number(digits);
-                this.decimals = decimals;
+                this.num2 = result.toString();
             }
         }
         return result;
@@ -64,31 +56,30 @@ const calculation = {
             this.num2 !== null &&
             this.operator !== null);
     },
-    decimalModeOn() {
-        this.decimalMode = true;
-        this.num2 = this.num2 ?? 0;
-    },
     appendNumber(number) {
-        if (this.decimalMode) {
-            this.decimals += number.toString();
+        if (number === ".") {
+            if (this.num2 === null) {
+                // this result in "0." later
+                this.num2 = "0";
+            }
+            else if (this.num2.includes(".")) {
+                // ignore multiple "."
+                return
+            }
         }
-        else {
-            this.num2 = this.num2 * 10 + number;
+
+        if (number || number === "0") {
+            this.num2 = (this.num2 ?? "") + number;
         }
     },
     getNum1() {
-        return this.num1;
+        return parseFloat(this.num1 ?? 0);
     },
     getNum2() {
-        if (this.decimals) {
-            return parseFloat(this.num2ToString());
-        }
-        else {
-            return this.num2;
-        }
+        return parseFloat(this.num2 ?? 0);
     },
     num2ToString() {
-        return this.num2.toString() + (this.decimals ? "." + this.decimals : "");
+        return this.num2.toString();
     }
 }
 
@@ -117,7 +108,8 @@ function operate(num1, num2, operator) {
 
 numbersKeypad.addEventListener("click", (event) => {
     const target = event.target;
-    if (target.classList.contains("number")) {
+    if (target.classList.contains("number") ||
+        target.classList.contains("dot")) {
         if (calculation.operator === "=") {
             calculation.clearMemory();
         }
@@ -128,21 +120,11 @@ numbersKeypad.addEventListener("click", (event) => {
         calculation.clearMemory();
         clearDisplay();
     }
-    else if (target.classList.contains("dot")) {
-        if (calculation.operator === "=") {
-            calculation.clearMemory();
-        }
-        if (!calculation.decimalMode) {
-            calculation.decimalModeOn();
-            updateDisplay(calculation.num2ToString());
-        }
-    }
 });
 
 function appendNumber(number) {
-    newDigit = +number;
-    calculation.appendNumber(newDigit);
-    updateDisplay(calculation.num2ToString());
+    calculation.appendNumber(number);
+    updateDisplay(calculation.num2);
 }
 
 function clearDisplay() {
