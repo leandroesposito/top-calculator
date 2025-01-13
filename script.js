@@ -32,12 +32,12 @@ const calculation = {
     },
     setOperator(operator) {
         this.operator = operator;
-        if (this.num1 === null && this.num2 !== null) {
+        if (this.num1 === null) {
             this.switchNumbers();
         }
     },
     switchNumbers() {
-        this.num1 = this.num2;
+        this.num1 = this.num2 ?? "0";
         this.num2 = null;
     },
     calculate() {
