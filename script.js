@@ -121,10 +121,14 @@ numbersKeypad.addEventListener("click", (event) => {
         handleNumberPress(buttonValue);
     }
     else if (target.classList.contains("clear")) {
-        calculation.clearMemory();
-        clearDisplay();
+        clear();
     }
 });
+
+function clear() {
+    calculation.clearMemory();
+    clearDisplay();
+}
 
 function handleNumberPress(buttonValue) {
     if (calculation.operator === "=") {
@@ -148,23 +152,30 @@ function updateDisplay(number) {
 
 operatorsKeypad.addEventListener("click", (event) => {
     const target = event.target;
-    if (target.classList.contains("button")) {
-        const result = calculation.calculate();
-        if (result !== null) {
-            updateDisplay(result);
-        }
-    }
     if (target.classList.contains("operator")) {
         const buttonValue = getDataValue(target);
-        calculation.setOperator(buttonValue);
+        handleOperatorPress(target, buttonValue);
     }
 });
+
+function handleOperatorPress(buttonValue) {
+    const result = calculation.calculate();
+    if (result !== null) {
+        updateDisplay(result);
+    }
+    calculation.setOperator(buttonValue);
+}
 
 function getDataValue(element) {
     return element.getAttribute("data-value");
 }
 
 backspaceButton.addEventListener("click", (event) => {
+    removeLastNumber();
+    event.stopImmediatePropagation();
+});
+
+function removeLastNumber() {
     if (calculation.operator === "=") {
         calculation.clearMemory();
     }
@@ -172,12 +183,24 @@ backspaceButton.addEventListener("click", (event) => {
         calculation.removeLastNumber();
     }
     updateDisplay(calculation.num2);
-    event.stopImmediatePropagation();
-});
+}
 
 document.body.addEventListener("keydown", (event) => {
     const key = event.key;
+    console.log(key)
     if ("0123456789.".includes(key)) {
         handleNumberPress(key);
+    }
+    if ("+-*/".includes(key)) {
+        handleOperatorPress(key);
+    }
+    if (key === "Enter") {
+        handleOperatorPress("=");
+    }
+    if (key === "Backspace") {
+        removeLastNumber();
+    }
+    if (key === "Escape") {
+        clear();
     }
 });
