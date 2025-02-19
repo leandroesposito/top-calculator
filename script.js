@@ -154,7 +154,7 @@ operatorsKeypad.addEventListener("click", (event) => {
     const target = event.target;
     if (target.classList.contains("operator")) {
         const buttonValue = getDataValue(target);
-        handleOperatorPress(target, buttonValue);
+        handleOperatorPress(buttonValue);
     }
 });
 
